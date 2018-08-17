@@ -2,7 +2,8 @@ import pytest
 import unittest
 import json
 import os
-import Questions.model
+from Questions import model
+from app import run
 
 
 class QuestionsTestCase(unittest.TestCase):
@@ -12,7 +13,11 @@ class QuestionsTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client
-        self.questions = {'name': 'Go to Borabora for vacation'}
+        self.questions = {'question': {
+                    'id' : '01',
+                    'content' : 'Lorem ette ddgh ddgdsg shgjjgf?',
+                    'date_posted': '25-October-2016'}}
+                    
 
         # binds the app to the current context
         with self.app.app_context():
@@ -61,8 +66,12 @@ class QuestionsTestCase(unittest.TestCase):
     def test_question_deletion(self):
         """Test API can delete an existing question. (DELETE request)."""
         rv = self.client().post(
-            '/Questions/',
-            data={'name': 'Eat, pray and love'})
+            '/Question/',
+            data={'question': {
+                    'id' : '01',
+                    'content' : 'Lorem ette ddgh ddgdsg shgjjgf?',
+                    'date_posted': '25-October-2016'}}
+                    )
         self.assertEqual(rv.status_code, 201)
         res = self.client().delete('/Questions/1')
         self.assertEqual(res.status_code, 200)
