@@ -1,15 +1,15 @@
 import pytest
 import json
 import os
-import Questions.model
+import user.model
 
 
 
 def test_new_user():
     
-    user = User('newuser@gmail.com', 'FlaskIsAwesome')
+    user = User('newuser@gmail.com', 'WelcometoAndela')
     assert new_user.email == 'newuser@gmail.com'
-    assert new_user.hashed_password != 'FlaskIsAwesome'
+    assert new_user.hashed_password != 'WelcometoAndela'
     assert not new_user.authenticated
     assert new_user.role == 'user'
 
